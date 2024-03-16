@@ -161,7 +161,6 @@ h6 {
 	outline: none;
 	padding: 0.5rem; /* Changed from fixed px values */
 	width: 90%;
-	-webkit-appearance: none;
 }
 
 /* CHATBOT END */

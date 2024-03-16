@@ -5,7 +5,8 @@ import Navbar from '../components/Navbar'
 import Search from '../components/Search'
 import LoadingCard from '../components/LoadingCards'
 import React, { useState } from 'react';
-
+import CookieBanner from '../components/CookieBanner'
+import posthog from 'posthog-js' 
 
 function Home() {
 
@@ -14,11 +15,7 @@ function Home() {
   const imageUrl3 = "https://i.ibb.co/qxqL1LC/9026747-number-circle-two-thin-icon.png"; 
   const imageUrl4 = "https://i.ibb.co/gRBp2mN/9026820-number-circle-three-thin-icon.png"; 
   const imageUrl5 = "https://i.ibb.co/b2p8jB2/9026794-number-circle-four-thin-icon.png"; 
-  const [searchCount, setSearchCount] = useState(0);
-
-  const handleSearch = () => {
-    setSearchCount(prevCount => prevCount + 1);
-  };
+ 
   
   return (
     <div>
@@ -29,32 +26,12 @@ function Home() {
                   <div className="mt-8">
                       <h1 className="text-5xl font-bold">Der intuitive Fördernavigator</h1>
                       <p className="py-1 max-w-md mx-auto text-center">Durchsuche über 2800 öffentliche Förderungen. Finde die Föderung, die für dein Unternehmen passt</p>
-                      <div className="stats shadow mt-9">
-                            <div className="stat place-items-center">
-                                <div className="stat-title text-xs">Fördervolumen</div>
-                                <div className="stat-value text-lg">31 mio EUR</div>
-                                <div className="stat-desc">eingeworben</div>
-                            </div>
-                            
-                            <div className="stat place-items-center">
-                                <div className="stat-title text-xs">Förderungen</div>
-                                <div className="stat-value text-secondary text-lg">342</div>
-                                <div className="stat-desc">vermittelt</div>
-                            </div>
-                            
-                            <div className="stat place-items-center">
-                                <div className="stat-title text-xs">Suchen</div>
-                                <div className="stat-value text-lg">{searchCount}</div>
-                                <div className="stat-desc">ausgeführt</div>
-                            </div>
-                            
-                            </div>
                   </div>
               </div>
           </div>
            
           <div className="chatbot-container mx-auto px-4 pb-4">
-          <Search onSearch={handleSearch} />
+          <Search />
           </div>
       </div>
       <div className="content-container mx-auto px-9">
@@ -157,6 +134,11 @@ function Home() {
                     </details> 
         </div>
     </div>
+    {posthog.has_opted_out_capturing() // new
+      ||posthog.has_opted_in_capturing() 
+        ? null 
+        : <CookieBanner /> 
+      }
 </div>
 
 <Footer />

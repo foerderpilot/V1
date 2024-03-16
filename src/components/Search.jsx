@@ -75,16 +75,16 @@ export default function Search() {
                         <textarea className="textarea textarea-bordered" placeholder="Beschreiben Sie Ihr Vorhaben" style={{ minHeight: '150px' }} value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                         {descriptionError && <div className="text-red-500 text-left mt-3 ml-2">{descriptionError}</div>}
                         <div className="flex flex-row items-center gap-2 mt-5 relative">
-                            <button type="button" className="btn" onClick={() => setShowDropdown(!showDropdown)}>{bundesland}</button>
-                            {showDropdown && (
-                                    <div className="absolute mt-1 w-52 bg-white shadow-md z-50 rounded-md">
-                                        <div className="max-h-48 overflow-auto rounded-md">
-                                            {bundeslaender.map(bl => (
-                                                <div key={bl} onClick={() => handleBundeslandSelect(bl)} className="cursor-pointer hover:bg-gray-100 p-2 rounded-md">{bl}</div>
-                                            ))}
-                                        </div>
+                        <div className="relative flex flex-col items-start">
+                                <button type="button" className="btn" onClick={() => setShowDropdown(!showDropdown)}>{bundesland}</button>
+                                {showDropdown && (
+                                    <div className="absolute top-full left-0 mt-1 w-52 bg-white shadow-md z-50 rounded-lg overflow-auto max-h-60">
+                                        {bundeslaender.map(bl => (
+                                            <div key={bl} onClick={() => handleBundeslandSelect(bl)} className="cursor-pointer hover:bg-gray-100 p-2 rounded-md">{bl}</div>
+                                        ))}
                                     </div>
                                 )}
+                            </div>
                             <button type="submit" className="btn" style={{ maxWidth: '250px' }}>Suche Starten</button>
                         </div>
                         {bundeslandError && <div className="text-red-500 text-left mt-3 ml-2">{bundeslandError}</div>}

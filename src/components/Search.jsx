@@ -6,24 +6,32 @@ import React, { useState, useRef } from 'react';
 export default function Search() {
 
     const [description, setDescription] = useState('');
-    const [bundesland, setBundesland] = useState('');
+    const [bundesland, setBundesland] = useState('Bundesland auswählen');
     const [cardsData, setCardsData] = useState([]);
     const [showLoadingCards, setShowLoadingCards] = useState(false);
     const [descriptionError, setDescriptionError] = useState('');
     const [bundeslandError, setBundeslandError] = useState('');
+    const [showDropdown, setShowDropdown] = useState(false);
     const searchContainerRef = useRef(null);
+
+    const bundeslaender = ["Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen"];
+
+    const handleBundeslandSelect = (bl) => {
+        setBundesland(bl);
+        setShowDropdown(false);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         let valid = true;
-        if (description.length < 100) {
+        if (description.length < 30) {
             setDescriptionError('Bitte beschreiben Sie Ihr Vorhaben etwas genauer');
             valid = false;
         } else {
             setDescriptionError('');
         }
-        if (!bundesland) {
-            setBundeslandError('Bitte geben Sie ein Bundesland ein');
+        if (bundesland === 'Bundesland auswählen') {
+            setBundeslandError('Bitte wählen Sie ein Bundesland aus');
             valid = false;
         } else {
             setBundeslandError('');
@@ -64,23 +72,19 @@ export default function Search() {
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
                     <div className="grid card place-items-left">
-                        <div className="chat chat-start mb-5">
-                            <div className="chat-bubble text-left">Willkommen zum Interaktiven Förderpilot. <br /><br />
-                            Durchforsten Sie mit nur einem Klick tausende von Förderungen von Bund, Länder und EU.<br /><br />
-                            Beschreiben Sie kurz Ihre Firma und Ihr Vorhaben und geben Sie das Bundesland Ihres Unternehmenssitzes ein, um relevante Förderungen zu sehen.<br /><br />
-                            </div>
-                        </div>
-                        
                         <textarea className="textarea textarea-bordered" placeholder="Beschreiben Sie Ihr Vorhaben" style={{ minHeight: '150px' }} value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                         {descriptionError && <div className="text-red-500 text-left mt-3 ml-2">{descriptionError}</div>}
-                        <div className="flex flex-row items-center gap-2 mt-5">
-                            <input 
-                                className="input input-bordered" 
-                                style={{ maxWidth: '250px' }}
-                                placeholder="Bundesland eingeben" 
-                                value={bundesland} 
-                                onChange={(e) => setBundesland(e.target.value)}
-                            />
+                        <div className="flex flex-row items-center gap-2 mt-5 relative">
+                            <button type="button" className="btn" onClick={() => setShowDropdown(!showDropdown)}>{bundesland}</button>
+                            {showDropdown && (
+                                    <div className="absolute mt-1 w-52 bg-white shadow-md z-50 rounded-md">
+                                        <div className="max-h-48 overflow-auto rounded-md">
+                                            {bundeslaender.map(bl => (
+                                                <div key={bl} onClick={() => handleBundeslandSelect(bl)} className="cursor-pointer hover:bg-gray-100 p-2 rounded-md">{bl}</div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             <button type="submit" className="btn" style={{ maxWidth: '250px' }}>Suche Starten</button>
                         </div>
                         {bundeslandError && <div className="text-red-500 text-left mt-3 ml-2">{bundeslandError}</div>}

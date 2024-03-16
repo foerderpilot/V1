@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/Foerderpilot_V3/',
+  base: '/V1/',
   plugins: [react()],
 })

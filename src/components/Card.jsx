@@ -34,7 +34,7 @@ export default function Card(props) {
                             <div className="text-base">{props.description}</div>
                             <div className="text-base">{props.badgeContent}</div>
                             <div className="font-bold text-gray-600">Fördergebiet: <span className="font-normal">{props.county}</span></div>
-                            <a href={props.link} className="text-blue-600 underline">Link zur Förderung</a>
+                            <a href={props.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Link zur Förderung</a>
                             <div className="flex space-x-2">
                                 <button className="bg-green-500 text-white px-8 py-2 rounded hover:bg-green-700 w-2/3"
                                         onClick={(e) => handleSave(e)}>Förderung speichern</button>
@@ -50,7 +50,8 @@ export default function Card(props) {
                 </div>
             )}
 
-            <div className="bg-white p-6 rounded-lg min-w-[300px] shadow-md cursor-pointer mb-4 flex flex-col justify-between ml-6"
+            {/* Change bg-white to bg-gray-100 or bg-gray-200 for a slight grey background */}
+            <div className="bg-gray-100 p-6 rounded-lg min-w-[300px] shadow-md cursor-pointer mb-4 flex flex-col justify-between ml-6"
                  onClick={() => setIsExpanded(true)}>
                 <div className="flex flex-col">
                     <h6 className="text-md font-semibold text-gray-800 break-words text-left mb-2">{props.title}</h6>

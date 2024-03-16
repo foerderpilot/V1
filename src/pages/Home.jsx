@@ -20,9 +20,9 @@ function Home() {
   return (
     <div>
     <Navbar />
-      <div className="min-h-screen bg-custom">
-          <div className="hero bg-custom">
-              <div className="hero-content">
+      <div className="hintergrund min-h-screen bg-custom">
+          <div className="hero bg-custom max-w-screen-xl">
+              <div className="hero-content max-w-screen-xl">
                   <div className="mt-8">
                       <h1 className="text-5xl font-bold">Der intuitive Fördernavigator</h1>
                       <p className="py-1 max-w-md mx-auto text-center">Durchsuche über 2800 öffentliche Förderungen. Finde die Föderung, die für dein Unternehmen passt</p>
@@ -30,11 +30,11 @@ function Home() {
               </div>
           </div>
            
-          <div className="chatbot-container mx-auto px-4 pb-4">
+          <div className="chatbot-container mx-auto px-4 pb-4 max-w-screen-xl">
           <Search />
           </div>
       </div>
-      <div className="content-container mx-auto px-9">
+      <div className="content-container mx-auto px-9 max-w-screen-xl">
       <h2 className="text-3xl font-semibold text-left mt-10">Wie funktioniert`s?</h2>
      <div className="pl-2 md:p-4">
         {/* timeline*/}
